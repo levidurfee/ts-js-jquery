@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>test</title>
+</head>
+<body>
+<div id="test">hello</div>
+<div class="test">test1 of test class</div>
+<div class="test">test2 of test class</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
+<script src="platform.js"></script>
+<script src="benchmark.js"></script>
+<script type="text/javascript" src="lol.js"></script>
+<script>
+var suite = new Benchmark.Suite;
+suite.add('jQuery[DOM].test', function() {
+	$(".test").hide().show().hide();
+})
+.add('JS[DOM].test', function() {
+	lol.e(".test").hide().show().hide();
+})
+// add listeners
+.on('cycle', function(event) {
+	// Benchmark.prototype.hz
+
+	//console.log(event);
+})
+.on('complete', function(event) {
+
+	console.log('Fastest is ' + this.filter('fastest').map('name'));
+})
+// run async
+.run({ 'async': false });
+
+var r = lol.post(suite[0].hz, suite[1].hz);
+
+console.log(suite[0].hz);
+console.log(suite[1].hz);
+
+</script>
+</body>
+</html>
